@@ -24,5 +24,7 @@ def app_create(config_name):
     # 路由和其他处理程序定义
     # 注册蓝图
     from .main import main as main_blueprint  # 从当前目录下面的main子目录导入main
+    from .admin import admin as admin_blueprint
     app.register_blueprint(main_blueprint)
+    app.register_blueprint(admin_blueprint)
     return app
