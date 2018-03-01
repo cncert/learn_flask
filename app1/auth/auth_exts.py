@@ -2,7 +2,7 @@
 
 from flask import request,abort, make_response, jsonify, g
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
-from werkzeug.security import  check_password_hash
+from werkzeug.security import check_password_hash
 from ..models import User
 
 auth = HTTPBasicAuth()
@@ -47,9 +47,12 @@ def unauthorized():
 @token_auth.verify_token
 def verify_token(token):
     g.user = None
-    user = User.verify_auth_token(token)
-    if user:
-        g.user = user
+    # user = User.verify_auth_token(token)
+    # if user:
+    #     g.user = user
+    #     return True
+    if token:  # 测试使用
+        g.user = token
         return True
     return False
 
