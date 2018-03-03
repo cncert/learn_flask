@@ -19,8 +19,9 @@ from app1.admin.views import UserApi  # 为了避免循环引用问题，在这�
 
 
 def app_create(config_name):
+    # app = Flask(__name__)
     app = Flask(__name__,static_folder='../web/static', template_folder='../web')
-    # 通过 static_folder 指定静态资源路径，
+    # 在这里指定的是全局的，通过 static_folder 指定静态资源路径，
     # 以便 index.html 能正确访问 CSS 等静态资源
     # template_folder 指定模板路径，以便 render_template 能正确渲染 index.html
     app.config.from_object(config[config_name])  # 可以直接把对象里面的配置数据转换到app.config里面
@@ -35,8 +36,10 @@ def app_create(config_name):
     # 注册蓝图
     from .main import main as main_blueprint  # 从当前目录下面的main子目录导入main
     from .admin import admin as admin_blueprint
+    from .haha import haha as ha_blueprint
     app.register_blueprint(main_blueprint)
     app.register_blueprint(admin_blueprint)
+    app.register_blueprint(ha_blueprint)
     api.add_resource(UserApi,'/api/users','/api/users/<string:id>',endpoint='users')
     # add_resource 函数使用指定的endpoint 将路由注册到框架上
     api.init_app(app)  # api初始化必须放在路由注册之后

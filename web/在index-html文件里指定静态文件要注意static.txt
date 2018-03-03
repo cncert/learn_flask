@@ -1,0 +1,7 @@
+在index-html文件里指定静态文件要注意static,\
+如：
+<link rel="stylesheet" href="../static/css/style.css">
+<script src="static/js/hello.js"></script>
+
+在app初始化的时候，app = Flask(__name__,static_folder='../web/static', template_folder='../web')，
+指定了static
