@@ -4,6 +4,7 @@ from flask import request,abort, make_response, jsonify, g
 from flask_httpauth import HTTPBasicAuth, HTTPTokenAuth, MultiAuth
 from werkzeug.security import check_password_hash
 from ..models import User
+from flask_jwt_extended import get_jwt_identity,jwt_required
 
 auth = HTTPBasicAuth()
 token_auth = HTTPTokenAuth(scheme='Bearer')
@@ -32,8 +33,12 @@ def verify_password(username,password):
         if not password_hash:
             return False
         if check_password_hash(password_hash,password):
+            g.user = username
             return True
         return False
+        # if username:  # 测试
+        #     g.user = username
+        #     return True
     except:
         return False
 
@@ -45,14 +50,17 @@ def unauthorized():
 
 # 发送令牌 curl -X GET -H "Authorization: Bearer secret-token-1" http://localhost:5000/api/s
 @token_auth.verify_token
+@jwt_required  # 使用flask_jwt_extended中的token验证，jwt_required也可以以装饰器的形式，直接加到路由函数上
 def verify_token(token):
     g.user = None
-    # user = User.verify_auth_token(token)
+    # user = User.verify_auth_token()
     # if user:
     #     g.user = user
     #     return True
-    if token:  # 测试使用
-        g.user = token
+
+    data = get_jwt_identity()  # 测试使用
+    print(data,u'验证通过')
+    if data:
         return True
     return False
 

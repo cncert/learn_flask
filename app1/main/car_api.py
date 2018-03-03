@@ -4,8 +4,10 @@
 from . import main
 from .. import db
 from ..models import Art
+from flask import render_template
 
 
-@main.route('/', methods=['GET', 'POST'])  # 不同的蓝本装饰器不同
+@main.route('/cc', methods=['GET', 'POST'])  # 不同的蓝本装饰器不同
 def index():
-    return 'hello'
+    return render_template('index.html')
+

@@ -14,6 +14,7 @@ class Config:
     FLASKY_MAIL_SUBJECT_PREFIX = '[Flasky]'
     FLASKY_MAIL_SENDER = 'Flasky Admin <flasky@example.com>'
     FLASKY_ADMIN = os.environ.get('FLASKY_ADMIN')
+    JWT_SECRET_KEY = 'DASSDSFDSxcxcfxfef????fsd'
 
     @staticmethod  # 使用类名可以直接调用该方法
     def init_app(app):
