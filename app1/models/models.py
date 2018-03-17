@@ -61,9 +61,156 @@ class User(UserMixin, db.Model):
         return '<User %r>' % self.username
 
 
-class Art(db.Model):
-    __tablename__ = 'artile'  #在数据库中显示的表名
-    id = db.Column(db.Integer,primary_key=True,autoincrement=True)
-    title = db.Column(db.String(100),nullable=False)
+class ServiceCheckResult(db.Model):
+    """
+    存储服务监控信息
+    service_name：服务名
+    service_state：服务状态
+    image_url：图片存放路径
+    classes：班次（分为‘白班’、‘夜班’）
+    on_watch：值班人员
+    date：交班时间
+
+    """
+    __tablename__ = 'service_check_result'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    service_name = db.Column(db.String(16))
+    service_state = db.Column(db.String(32))
+    image_url = db.Column(db.String(256), nullable=True)
+    classes = db.Column(db.String(32))
+    on_watch = db.Column(db.String(16))
+    date = db.Column(db.String(32))
+
+    def __repr__(self):
+        return '<ServiceCheckResult %r>' % self.service_name
+
+    @staticmethod
+    def from_json(json_post):
+        """由用户post的json数据返回ServiceCheckResult对象"""
+
+        service_name = json_post.get('service_name')
+        service_state = json_post.get('service_state')
+        image_url = json_post.get('image_url')
+        classes = json_post.get('classes')
+        on_watch = json_post.get('on_watch')
+        date = json_post.get('date')
+        return ServiceCheckResult(service_name=service_name,
+                                  service_state=service_state,
+                                  image_url=image_url,
+                                  classes=classes,
+                                  on_watch=on_watch,
+                                  date=date)
+
+
+class IdcCheckResult(db.Model):
+    """
+    存储巡检结果:
+    temperature:温度
+    humidity:湿度
+    idc:机房
+    check_user:巡检人员
+    check_time:巡检时间
+    on_watch：值班人员
+    date：交班日期
+    """
+    __tablename__ = 'idc_check_result'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    ca_temperature = db.Column(db.String(16))
+    ca_humidity = db.Column(db.String(16))
+    two_temperature = db.Column(db.String(16))
+    two_humidity = db.Column(db.String(16))
+    five_temperature = db.Column(db.String(16))
+    five_humidity = db.Column(db.String(16))
+    check_user = db.Column(db.String(32))
+    check_time = db.Column(db.DATETIME())
+    classes = db.Column(db.String(32))
+    on_watch = db.Column(db.String(16))
+    date = db.Column(db.String(32))
+
+    def __repr__(self):
+        return '<IdcCheckResult %r>' % self.__tablename__
+
+    @staticmethod
+    def from_json(json_post):
+        """由用户post的json数据返回IdcCheckResult对象"""
+
+        ca_temperature = json_post.get('ca_temperature')
+        ca_humidity = json_post.get('ca_humidity')
+        two_temperature = json_post.get('two_temperature')
+        two_humidity = json_post.get('two_humidity')
+        five_temperature = json_post.get('five_temperature')
+        five_humidity = json_post.get('five_humidity')
+        check_user = json_post.get('check_user')
+        check_time = json_post.get('check_time')
+        on_watch = json_post.get('on_watch')
+        date = json_post.get('date')
+        classes = json_post.get('classes')
+        return IdcCheckResult(ca_temperature=ca_temperature,
+                              ca_humidity=ca_humidity,
+                              two_temperature=two_temperature,
+                              two_humidity=two_humidity,
+                              five_temperature=five_temperature,
+                              five_humidity=five_humidity,
+                              check_user=check_user,
+                              check_time=check_time,
+                              on_watch=on_watch,
+                              date=date,
+                              classes=classes)
+
+
+class CheckDetails(db.Model):
+    """
+    hardware:硬件
+    system：系统
+    network：网络
+    service：服务
+    is_handle：是否处理
+    is_report：故障报告
+    alert_source：告警源
+    on_watch：值班人员
+    date：交班日期
+    """
+    __tablename__ = 'check_details'
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    hardware = db.Column(db.Text())
+    system = db.Column(db.Text())
+    network = db.Column(db.Text())
+    service = db.Column(db.Text())
+    is_handle = db.Column(db.Integer, default=1)
+    is_report = db.Column(db.Integer, default=0)
+    alert_source = db.Column(db.String(32))
+    classes = db.Column(db.String(32))
+    on_watch = db.Column(db.String(16))
+    date = db.Column(db.String(32))
+
+    def __repr__(self):
+        return '<CheckDetails %r>' % self.__tablename__
+
+    @staticmethod
+    def from_json(json_post):
+        """由用户post的json数据返回checkdetail对象"""
+
+        hardware = json_post.get('hardware')
+        system = json_post.get('system')
+        network = json_post.get('network')
+        service = json_post.get('service')
+        is_handle = json_post.get('is_handle')
+        is_report = json_post.get('is_report')
+        alert_source = json_post.get('alert_source')
+        on_watch = json_post.get('on_watch')
+        date = json_post.get('date')
+        classes = json_post.get('classes')
+        return CheckDetails(hardware=hardware,
+                            system=system,
+                            network=network,
+                            service=service,
+                            is_handle=is_handle,
+                            is_report=is_report,
+                            alert_source=alert_source,
+                            on_watch=on_watch,
+                            date=date,
+                            classes=classes)
+
+
 
 

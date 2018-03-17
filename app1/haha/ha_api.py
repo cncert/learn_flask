@@ -9,7 +9,7 @@ from ..models import User
 
 
 @haha.route('/', methods=['GET', 'POST'])  # 不同的蓝本装饰器不同
-# @multi_auth.login_required
+@multi_auth.login_required
 def hah():
     return render_template('index2/index.html')
 

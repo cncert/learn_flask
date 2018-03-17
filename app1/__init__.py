@@ -14,7 +14,8 @@ mail = Mail()
 moment = Moment()
 db = SQLAlchemy()
 api = Api()
-from app1.admin.views import UserApi  # 为了避免循环引用问题，在这里导入
+from app1.admin.views import ServiceCheckApi, IdcCheckApi, CheckDetailApi, \
+    SendEmailApi  # 为了避免循环引用问题，在这里导入
 # 初始化app
 
 
@@ -40,7 +41,10 @@ def app_create(config_name):
     app.register_blueprint(main_blueprint)
     app.register_blueprint(admin_blueprint)
     app.register_blueprint(ha_blueprint)
-    api.add_resource(UserApi,'/api/users','/api/users/<string:id>',endpoint='users')
+    api.add_resource(ServiceCheckApi, '/api/service_check',endpoint='service_check')
+    api.add_resource(IdcCheckApi, '/api/idc_check',endpoint='idc_check')
+    api.add_resource(CheckDetailApi, '/api/check_detail',endpoint='check_detail')
+    api.add_resource(SendEmailApi, '/api/send_email',endpoint='send_email')
     # add_resource 函数使用指定的endpoint 将路由注册到框架上
     api.init_app(app)  # api初始化必须放在路由注册之后
     CORS(app)  # 跨域请求

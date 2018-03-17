@@ -24,21 +24,21 @@ multi_auth = MultiAuth(auth, token_auth)  # 多重验证
 @auth.verify_password
 def verify_password(username,password):
     try:
-        if username is None:
-            abort(400)
-        user = User.query.filter_by(username=username).first()
-        if not user:
-            return False
-        password_hash = user.password_hash
-        if not password_hash:
-            return False
-        if check_password_hash(password_hash,password):
-            g.user = username
-            return True
-        return False
-        # if username:  # 测试
+        # if username is None:
+        #     abort(400)
+        # user = User.query.filter_by(username=username).first()
+        # if not user:
+        #     return False
+        # password_hash = user.password_hash
+        # if not password_hash:
+        #     return False
+        # if check_password_hash(password_hash,password):
         #     g.user = username
         #     return True
+        # return False
+        if username:  # 测试
+            g.user = username
+            return True
     except:
         return False
 

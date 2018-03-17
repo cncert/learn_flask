@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Token</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<style>
+        pre {
+            display: block;
+            overflow-x: auto;
+            padding: 0.5em;
+            color: #333;
+            background: #f7ffe6;
+            width: 85%;
+            margin-left: 2em;
+            font-size: 12px;
+        }
+        .indent {
+            text-indent: 2em;
+        }
+        table {
+            table-layout: fixed;
+        }
+    </style>
+</head>
+<body style="margin: 0; padding: 0;" bgcolor="#fffffff">
+	<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td style="padding: 10px 0 30px 0;">
+				<table align="center" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc; border-collapse: collapse; " width="100%">
+					<tr>
+						<td align="center" bgcolor="#70bbd9" style="color:white;padding: 40px 0 30px 0; font-size: 24px; font-weight: bold; font-family: Arial, sans-serif;">
+						    <b>交班记录</b>
+                        </td>
+					</tr>
+					<tr>
+						<td bgcolor="#ffffff" style="padding: 1px 0px 1px 0px;">
+                            <table align="center" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc; border-collapse: collapse; " width="100%">
+                                <tr>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;padding: 7px 0 7px 0; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">
+                                        <!--值班日期-->值班日期：  {{ date }}
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;padding: 7px 0 7px 0; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">
+                                        <!--值班类型-->值班类型：  {{ classes }}
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;padding: 7px 0 7px 0; font-size: 20px; font-weight: bold; font-family: Arial, sans-serif;">
+                                        <!--值班人员-->值班人员：  {{ message.service_data.0.on_watch }}
+                                    </td>
+                                </tr>
+                            </table>
+						</td>
+					</tr>
+                    <tr><!--服务状态-->
+                        <td bgcolor="#ffffff" style="padding: 0px 0px 1px 0px;">
+                            <table align="center" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc; border-collapse: collapse; " width="100%">
+                                <tr>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        国家域名解析
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        根镜像服务
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        权威云解析
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        官网
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        重点保障对象
+                                    </td>
+                                </tr>
+                                <tr>
+                                    {{ message.service_data }}
+                                </tr>
+                                <tr>
+                                    {% for i in message.service_data %}
+                                            <td align="center" bgcolor="#70bbd9" style="color:white;
+                                            padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                             font-family: Arial, sans-serif;">
+                                                <!--服务状态-->{{ i.service_state }}
+                                            </td>
+                                    {% endfor %}
+                                </tr>
+                                <tr>
+                                    {% for i in message.service_data %}
+                                            <td align="center" bgcolor="#70bbd9" style="color:white;
+                                                padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                                 font-family: Arial, sans-serif;">
+                                                    <!--服务图片-->{{ i.image_url }}
+                                            </td>
+                                    {% endfor %}
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr><!--机房信息-->
+                        <td bgcolor="#ffffff" style="padding: 0px 0px 1px 0px;">
+                            <table align="center" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc; border-collapse: collapse; " width="100%">
+                                <tr>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        CA机房温度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        CA机房湿度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        5楼机房温度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        5楼机房湿度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        2楼机房温度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        2楼机房湿度
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        巡检人员
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        巡检时间
+                                    </td>
+                                </tr>
+                                {% for i in message.idc_data %}
+                                   <tr>
+                                        <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            {% if i.ca_temperature == 1 %}
+                                                正常
+                                            {% elif i.ca_temperature == 0 %}
+                                                异常
+                                            {% endif %}
+                                            <!--机房温湿度信息-->
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房温湿度信息-->
+                                            {% if i.ca_humidity == 1 %}
+                                                正常
+                                            {% elif i.ca_humidity == 0 %}
+                                                异常
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            {% if i.five_temperature == 1 %}
+                                                正常
+                                            {% elif i.five_temperature == 0 %}
+                                                异常
+                                            {% endif %}
+                                            <!--机房温湿度信息-->
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房温湿度信息-->
+                                            {% if i.five_humidity == 1 %}
+                                                正常
+                                            {% elif i.five_humidity == 0 %}
+                                                异常
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房温湿度信息-->
+                                            {% if i.two_temperature == 1 %}
+                                                正常
+                                            {% elif i.two_temperature == 0 %}
+                                                异常
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房温湿度信息-->
+                                            {% if i.two_humidity == 1 %}
+                                                正常
+                                            {% elif i.two_humidity == 0 %}
+                                                异常
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房巡检人员-->{{ i.check_user }}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--机房巡检时间-->{{ i.check_time }}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr><!--详情信息-->
+                        <td bgcolor="#ffffff" style="padding: 0px 0px 1px 0px;">
+                            <table align="center" cellpadding="0" cellspacing="0" style="border: 1px solid #cccccc; border-collapse: collapse; " width="100%">
+                                <tr>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        硬件
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        系统
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        网络
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        服务
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        是否处理
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        故障报告
+                                    </td>
+                                    <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                        告警源
+                                    </td>
+                                </tr>
+                                {% for i in message.detail_data %}
+                                   <tr>
+                                        <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            {{ i.hardware }}
+                                            <!--硬件详情-->
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--系统-->
+                                            {{ i.system }}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            {{ i.network }}
+                                            <!--网络-->
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--服务-->
+                                            {{ i.service }}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--是否处理故障-->
+                                            {% if i.is_handle == 1 %}
+                                                已处理
+                                            {% elif i.is_handle == 0 %}
+                                                未处理
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--有无报告-->
+                                            {% if i.trouble_report == 1 %}
+                                                有报告
+                                            {% elif i.trouble_report == 0 %}
+                                                无报告
+                                            {% endif %}
+                                        </td>
+                                   <td align="center" bgcolor="#70bbd9" style="color:white;
+                                        padding: 7px 0 7px 0; font-size: 20px; font-weight: bold;
+                                         font-family: Arial, sans-serif;">
+                                            <!--告警源-->
+                                            {% if i.alert_source == 0 %}
+                                                SOS2
+                                            {% elif i.alert_source == 1 %}
+                                                邮件
+                                            {% elif i.alert_source == 2 %}
+                                                电话
+                                            {% elif i.alert_source == 3 %}
+                                                Netmon
+                                            {% endif %}
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+						<td bgcolor="#ee4c50" style="padding: 30px 30px 30px 30px;background: #70bbd9;color: white;" >
+							<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr>
+									<td style="color: #ffffff; font-family: Arial, sans-serif; font-size: 18px;text-align: center" width="75%">
+                                        <br><strong>运行管理部</strong><br/>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+
+
+</body>
+</html>
+
+
