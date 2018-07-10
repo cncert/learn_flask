@@ -1,4 +1,4 @@
-#flask项目的基本框架
+# flask项目的基本框架
 
 - restful api的使用
     1. 使用flask_restful模块优雅的返回接口数据
