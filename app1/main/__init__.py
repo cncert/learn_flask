@@ -2,7 +2,7 @@
 
 from flask import Blueprint
 # main = Blueprint('main', __name__,url_prefix='/login',static_folder='../../web/static', template_folder='../../web')
-main = Blueprint('main', __name__,url_prefix='/login')
+main = Blueprint('main', __name__)
 # 不同的蓝本可以指定不同的静态文件。。。。
 # 通过 static_folder 指定静态资源路径，
 # 以便 index.html 能正确访问 CSS 等静态资源
